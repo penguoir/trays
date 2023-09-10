@@ -8,7 +8,8 @@
   <%= inbox_item.content %>
 
   <div>
-    <%= button_to "Pin", pin_inbox_item_path(inbox_item), params: { inbox_item: { processed: true } }, class: "btn btn-success" %>
+    <%= button_to "Pin", pin_inbox_item_path(inbox_item), class: "btn btn-success" %>
+    <%= button_to "Unpin", unpin_inbox_item_path, class: "btn btn-success" %>
 
     <%= button_to "Mark as Processed", processed_inbox_item_path(inbox_item), params: { inbox_item: { processed: true } }, class: "btn btn-success" %>
   </div>

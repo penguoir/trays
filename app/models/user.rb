@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :services
 
   has_many :inbox_items, dependent: :destroy
-  belongs_to :pinned_inbox_item, class_name: "InboxItem"
+  belongs_to :pinned_inbox_item, class_name: "InboxItem", optional: true
 end

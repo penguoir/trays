@@ -18,5 +18,8 @@ class UserTest < ActiveSupport::TestCase
     inbox_item = InboxItem.create!(user: @user, content: "abc")
     @user.update!(pinned_inbox_item: inbox_item)
     assert_equal inbox_item, @user.pinned_inbox_item
+
+    # But not required
+    @user.update!(pinned_inbox_item: nil)
   end
 end

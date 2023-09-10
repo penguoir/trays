@@ -29,5 +29,11 @@ Rails.application.routes.draw do
       post :processed
       post :pin
     end
+
+    collection do
+      post :unpin
+    end
   end
+
+  resources :projects
 end

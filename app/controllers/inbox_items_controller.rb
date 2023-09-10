@@ -39,6 +39,11 @@ class InboxItemsController < ApplicationController
     redirect_to inbox_items_path, notice: "Inbox item pinned successfully"
   end
 
+  def unpin
+    current_user.update!(pinned_inbox_item: nil)
+    redirect_to inbox_items_path, notice: "Inbox item unpinned successfully"
+  end
+
   private
 
   def inbox_item_params
