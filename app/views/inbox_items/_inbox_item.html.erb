@@ -1,0 +1,15 @@
+<div class="card p-3 mb-2">
+  <% if inbox_item.processed? %>
+    <div class="alert alert-success" role="alert">
+      <strong>Processed!</strong> <%= inbox_item.processed_at %>
+    </div>
+  <% end %>
+
+  <%= inbox_item.content %>
+
+  <div>
+    <%= button_to "Pin", pin_inbox_item_path(inbox_item), params: { inbox_item: { processed: true } }, class: "btn btn-success" %>
+
+    <%= button_to "Mark as Processed", processed_inbox_item_path(inbox_item), params: { inbox_item: { processed: true } }, class: "btn btn-success" %>
+  </div>
+</div>

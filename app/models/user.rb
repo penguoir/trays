@@ -9,4 +9,7 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :services
+
+  has_many :inbox_items, dependent: :destroy
+  belongs_to :pinned_inbox_item, class_name: "InboxItem"
 end

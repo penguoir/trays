@@ -1,0 +1,11 @@
+<h1>
+  Add to inbox
+</h1>
+
+<%= form_with model: @inbox_item do |f| %>
+  <%= f.rich_text_area :content, autofocus: true %>
+
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'View all inbox items', inbox_items_path %>

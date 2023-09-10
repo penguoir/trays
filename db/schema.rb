@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_20_105457) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_211016) do
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,6 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_105457) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "inbox_items", force: :cascade do |t|
+    t.boolean "processed", default: false, null: false
+    t.datetime "processed_at"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_inbox_items_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
     t.integer "recipient_id", null: false
@@ -97,11 +116,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_105457) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pinned_inbox_item_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["pinned_inbox_item_id"], name: "index_users_on_pinned_inbox_item_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "services", "users"
+  add_foreign_key "users", "inbox_items", column: "pinned_inbox_item_id"
 end

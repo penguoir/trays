@@ -12,6 +12,10 @@
       <div class="container mt-4 mx-auto">
         <%= yield %>
       </div>
+
+      <% if current_user&.pinned_inbox_item %>
+        <%= render 'inbox_items/inbox_item', inbox_item: current_user.pinned_inbox_item %>
+      <% end %>
     </main>
 
     <%= render 'shared/footer' %>
