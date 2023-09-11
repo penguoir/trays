@@ -1,0 +1,17 @@
+<div class="flex max-w-6xl">
+  <div class="lg:w-[15%]"></div>
+
+  <div class="px-4 mt-16 flex-grow">
+    <div class="flex justify-between mb-8">
+      <h1 class="flex-grow font-bold">
+        Completed Next Actions
+      </h1>
+    </div>
+
+    <div class="mb-24">
+        <%= render @next_actions %>
+    </div>
+
+      <%= link_to 'Back to incomplete next actions', next_actions_path, class: "text-blue-500 underline block mr-2" %>
+  </div>
+</div>

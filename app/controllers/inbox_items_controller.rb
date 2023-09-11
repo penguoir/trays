@@ -11,13 +11,8 @@ class InboxItemsController < ApplicationController
   end
 
   def create
-    @inbox_item = current_user.inbox_items.build(inbox_item_params)
-
-    if @inbox_item.save
-      redirect_to new_inbox_item_path, notice: "Inbox item created successfully"
-    else
-      render :new
-    end
+    @inbox_item = current_user.inbox_items.create(inbox_item_params)
+    respond_with @inbox_item, location: -> { new_inbox_item_path }
   end
 
   def show

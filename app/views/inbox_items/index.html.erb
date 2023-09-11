@@ -6,14 +6,18 @@
       <%= link_to "Add items to inbox", new_inbox_item_path, class: "text-blue-500 underline" %>
     </div>
 
-    <div class="mb-4">
-      <%= render @inbox_items.first %>
-    </div>
+    <% if @inbox_items.empty? %>
+      <p>Your inbox is empty!</p>
+    <% else %>
+      <div class="mb-4">
+        <%= render @inbox_items.first %>
+      </div>
 
-    <p>
-      <%= pluralize(@inbox_items.count - 1, "other item") %> in your inbox, process
-      this one to see the next one.
-    </p>
+      <p>
+        <%= pluralize(@inbox_items.count - 1, "other item") %> in your inbox, process
+        this one to see the next one.
+      </p>
+    <% end %>
   </div>
 </main>
 

@@ -36,4 +36,14 @@ Rails.application.routes.draw do
   end
 
   resources :projects
+  resources :next_actions do
+    collection do
+      get :completed
+    end
+
+    member do
+      post :complete
+      post :incomplete
+    end
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_11_185300) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_11_205026) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -78,6 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_185300) do
     t.index ["user_id"], name: "index_inbox_items_on_user_id"
   end
 
+  create_table "next_actions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "completed_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_next_actions_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
     t.integer "recipient_id", null: false
@@ -134,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_185300) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "next_actions", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "services", "users"
   add_foreign_key "users", "inbox_items", column: "pinned_inbox_item_id"
