@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   has_rich_text :content
 
   validate :cannot_be_incubating_and_waiting_for
+  validate :waiting_for_must_match_waiting_since
 
   scope :incubating, -> { where("incubating_until > ?", DateTime.current) }
   scope :waiting_for, -> { where("waiting_for is not null") }
@@ -41,6 +42,14 @@ class Project < ApplicationRecord
   def cannot_be_incubating_and_waiting_for
     if incubating? && waiting_for?
       errors.add(:base, "cannot be waiting for and incubating")
+    end
+  end
+
+  def waiting_for_must_match_waiting_since
+    if waiting_for? && waiting_since.blank?
+      errors.add(:base, "cannot have waiting_for without waiting_since")
+    elsif waiting_since.present? && waiting_for.blank?
+      errors.add(:base, "cannot have waiting_since without waiting_for")
     end
   end
 end

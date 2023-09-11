@@ -1,0 +1,6 @@
+<% content_for :active_pane do %>
+  <%= render "form", project: @project %>
+  <%= button_to "Delete", project_path(@project), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
+<%= render template: "projects/layout" %>

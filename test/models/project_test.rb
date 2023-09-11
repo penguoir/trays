@@ -46,8 +46,23 @@ class ProjectTest < ActiveSupport::TestCase
   test "project cannot be waiting for and incubating" do
     project = Project.new
     project.waiting_for = "something"
+    project.waiting_since = 1.day.ago
     project.incubating_until = 1.day.from_now
     assert_not project.valid?
     assert_equal ["cannot be waiting for and incubating"], project.errors[:base]
+  end
+
+  test "cannot have waiting_since without waiting_for" do
+    project = Project.new
+    project.waiting_since = 1.day.ago
+    assert_not project.valid?
+    assert_equal ["cannot have waiting_since without waiting_for"], project.errors[:base]
+  end
+
+  test "cannot have waiting_for without waiting_since" do
+    project = Project.new
+    project.waiting_for = "something"
+    assert_not project.valid?
+    assert_equal ["cannot have waiting_for without waiting_since"], project.errors[:base]
   end
 end

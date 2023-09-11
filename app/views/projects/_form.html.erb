@@ -16,8 +16,15 @@
   </div>
 
   <div class="block mb-2">
-    <%= form.label :waiting_for, class: "block mb-1" %>
-    <%= form.text_field :waiting_for, class: "w-full" %>
+    <%= form.label :waiting_for, class: "block mb-1" do %>
+      Waiting for
+
+      <% if project.waiting_since.present? %>
+        (since <%= local_time_ago(project.waiting_since) %>)
+      <% end %>
+    <% end %>
+
+    <%= form.text_field :waiting_for, class: "w-full mb-1" %>
   </div>
 
   <%= form.submit %>

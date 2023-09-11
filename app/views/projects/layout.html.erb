@@ -15,7 +15,7 @@
           <h2 class="inline-block">Incubating</h2>
         </summary>
 
-        <%= render @projects.incubating %>
+        <%= render @projects.incubating.order(incubating_until: :asc) %>
       </details>
 
       <details class="mb-4" <%= @project&.waiting_for? && "open" %>>
@@ -23,7 +23,7 @@
           <h2 class="inline-block">Waiting For</h2>
         </summary>
 
-        <%= render @projects.waiting_for %>
+        <%= render @projects.waiting_for.order(waiting_since: :desc) %>
       </details>
     </div>
 

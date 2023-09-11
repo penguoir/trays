@@ -16,7 +16,7 @@
 
     <% if project.waiting_for? %>
       <span class="text-xs text-gray-500">
-        waiting for <%= project.waiting_for %>
+        waiting for <%= project.waiting_for %> since <%= local_time_ago project.waiting_since %>
       </span>
     <% end %>
   </span>
