@@ -1,4 +1,4 @@
-<%= form_with model: project do |form| %>
+<%= form_with model: project, class: "mb-16" do |form| %>
   <%= form.text_field :name,
     class: "w-full mb-8",
     placeholder: "Type your project title here...",
@@ -27,5 +27,17 @@
     <%= form.text_field :waiting_for, class: "w-full mb-1" %>
   </div>
 
-  <%= form.submit %>
+  <%= form.submit class: "border border-black px-2 py-1" %>
 <% end %>
+
+<div class="mb-16">
+  <div class="flex justify-between">
+    <h2 class="font-bold mb-4">
+      Next Actions in project
+    </h2>
+
+    <%= link_to "New next action", new_next_action_path(project_id: project), class: "text-blue-500 underline" %>
+  </div>
+
+  <%= render @project.next_actions, project_view: true %>
+</div>

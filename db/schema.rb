@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_11_214247) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_11_221624) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -76,6 +76,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_214247) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_inbox_items_on_user_id"
+  end
+
+  create_table "next_action_projects", force: :cascade do |t|
+    t.integer "next_action_id", null: false
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["next_action_id"], name: "index_next_action_projects_on_next_action_id"
+    t.index ["project_id"], name: "index_next_action_projects_on_project_id"
   end
 
   create_table "next_actions", force: :cascade do |t|
@@ -144,6 +153,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_214247) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "next_action_projects", "next_actions"
+  add_foreign_key "next_action_projects", "projects"
   add_foreign_key "next_actions", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "services", "users"

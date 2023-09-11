@@ -9,6 +9,10 @@ class NextActionsController < ApplicationController
 
   def new
     @next_action = NextAction.new
+
+    if params[:project_id]
+      @next_action.projects << Project.find(params[:project_id])
+    end
   end
 
   def create
@@ -53,6 +57,8 @@ class NextActionsController < ApplicationController
   private
 
   def next_action_params
-    params.require(:next_action).permit(:name).merge(user: current_user)
+    params.require(:next_action)
+      .permit(:name, :project_ids => [])
+      .merge(user: current_user)
   end
 end

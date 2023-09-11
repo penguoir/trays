@@ -2,12 +2,16 @@ class Project < ApplicationRecord
   belongs_to :user
   has_rich_text :content
 
+  has_many :next_action_projects
+  has_many :next_actions, through: :next_action_projects
+
   validate :cannot_be_incubating_and_waiting_for
   validate :waiting_for_must_match_waiting_since
 
   scope :incubating, -> { where("incubating_until > ?", DateTime.current) }
   scope :waiting_for, -> { where("waiting_for is not null") }
   scope :active, -> { where.not(id: incubating.ids + waiting_for.ids) }
+  scope :missing_next_action, -> { where.missing(:next_actions) }
 
   def incubating?
     incubating_until&.future? || false
@@ -35,6 +39,10 @@ class Project < ApplicationRecord
     else
       super(value)
     end
+  end
+
+  def missing_next_action?
+    self.class.missing_next_action.exists?(id)
   end
 
   private

@@ -4,5 +4,10 @@
     <%= f.text_field :name, class: "w-full" %>
   </div>
 
+  <div class="mb-2">
+    <%= f.label :projects, class: "block mb-1" %>
+    <%= collection_check_boxes(:next_action, :project_ids, Project.all, :id, :name) %>
+  </div>
+
   <%= f.submit class: "border border-black px-2 py-1 capitalize" %>
 <% end %>

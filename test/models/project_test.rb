@@ -65,4 +65,13 @@ class ProjectTest < ActiveSupport::TestCase
     assert_not project.valid?
     assert_equal ["cannot have waiting_for without waiting_since"], project.errors[:base]
   end
+
+  test "missing next action" do
+    project = Project.create!(name: "Project", user: users(:ori))
+    assert_empty project.next_actions
+    assert_predicate project, :missing_next_action?
+
+    project.next_actions << NextAction.new(user: users(:ori), name: "Next Action")
+    assert_not_predicate project, :missing_next_action?
+  end
 end

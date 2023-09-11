@@ -10,13 +10,19 @@
 
     <% if project.incubating? %>
       <span class="text-xs text-gray-500">
-        incubating until <%= local_time_ago project.incubating_until %>
+        incubating until <%= local_relative_time project.incubating_until %>
       </span>
     <% end %>
 
     <% if project.waiting_for? %>
       <span class="text-xs text-gray-500">
         waiting for <%= project.waiting_for %> since <%= local_time_ago project.waiting_since %>
+      </span>
+    <% end %>
+
+    <% if project.active? && project.missing_next_action? %>
+      <span class="text-xs text-red-400">
+        missing next action
       </span>
     <% end %>
   </span>
