@@ -1,27 +1,31 @@
-<div class="flex justify-between items-center mb-2">
-  <i class="mr-1.5">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-  </i>
+<div class="grid grid-cols-12 mb-2 items-center">
+  <div class="col-span-9 flex">
+    <i class="mr-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </i>
 
-  <p class="flex-grow">
-    <% if next_action.complete? %>
-      <s><%= next_action.name %></s>
-    <% else %>
-      <%= next_action.name %>
+    <p>
+      <% if next_action.complete? %>
+        <s><%= next_action.name %></s>
+      <% else %>
+        <%= next_action.name %>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="col-span-3 flex justify-end items-center">
+    <% if next_action.incomplete? %>
+      <%= link_to "Edit", edit_next_action_path(next_action), class: "text-blue-500 underline mr-2" %>
     <% end %>
-  </p>
 
-  <% if next_action.incomplete? %>
-    <%= link_to "Edit", edit_next_action_path(next_action), class: "text-blue-500 underline mr-2" %>
-  <% end %>
-
-  <% if next_action.complete? %>
-    <%= button_to "Mark as incomplete", incomplete_next_action_path(next_action),
-      class: "border border-black px-2 py-1" %>
-  <% else %>
-    <%= button_to "Mark as complete", complete_next_action_path(next_action),
-      class: "border border-black px-2 py-1" %>
-  <% end %>
+    <% if next_action.complete? %>
+      <%= button_to "Mark as incomplete", incomplete_next_action_path(next_action),
+        class: "border border-black px-2 py-1" %>
+    <% else %>
+      <%= button_to "Mark as complete", complete_next_action_path(next_action),
+        class: "border border-black px-2 py-1" %>
+    <% end %>
+  </div>
 </div>
