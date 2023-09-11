@@ -1,7 +1,19 @@
-<h1>
-  Process Inbox
-</h1>
+<main class="container mx-auto mt-16 px-4 grid grid-cols-12">
+  <div class="col-span-6">
+    <div class="flex justify-between mb-8">
+      <h1>Inbox</h1>
 
-<%= link_to "Add items to inbox", new_inbox_item_path %>
+      <%= link_to "Add items to inbox", new_inbox_item_path, class: "text-blue-500 underline" %>
+    </div>
 
-<%= render @inbox_items %>
+    <div class="mb-4">
+      <%= render @inbox_items.first %>
+    </div>
+
+    <p>
+      <%= pluralize(@inbox_items.count - 1, "other item") %> in your inbox, process
+      this one to see the next one.
+    </p>
+  </div>
+</main>
+

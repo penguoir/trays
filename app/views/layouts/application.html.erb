@@ -5,17 +5,19 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="flex flex-col h-100">
-    <main> 
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/notices' %>
+  <body class="flex flex-col min-h-screen">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/notices' %>
 
+    <div class="flex-grow">
       <%= yield %>
+    </div>
 
-      <% if current_user&.pinned_inbox_item %>
+    <% if current_user&.pinned_inbox_item %>
+      <div class="sticky bottom-2 mx-auto">
         <%= render 'inbox_items/inbox_item', inbox_item: current_user.pinned_inbox_item %>
-      <% end %>
-    </main>
+      </div>
+    <% end %>
 
     <%= render 'shared/footer' %>
   </body>

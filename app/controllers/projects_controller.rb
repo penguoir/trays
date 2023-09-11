@@ -3,8 +3,10 @@ class ProjectsController < ApplicationController
   respond_to :html
 
   def index
-    if Project.first
-      redirect_to Project.first
+    first_project = Project.active.first
+
+    if first_project
+      redirect_to first_project
     else
       redirect_to new_project_path
     end

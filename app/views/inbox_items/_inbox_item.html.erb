@@ -1,3 +1,4 @@
+<!--
 <div class="card p-3 mb-2">
   <% if inbox_item.processed? %>
     <div class="alert alert-success" role="alert">
@@ -8,9 +9,25 @@
   <%= inbox_item.content %>
 
   <div>
-    <%= button_to "Pin", pin_inbox_item_path(inbox_item), class: "btn btn-success" %>
-    <%= button_to "Unpin", unpin_inbox_items_path, class: "btn btn-success" %>
+  </div>
+</div>
+-->
 
-    <%= button_to "Mark as Processed", processed_inbox_item_path(inbox_item), params: { inbox_item: { processed: true } }, class: "btn btn-success" %>
+<div class="border border-black p-1 aspect-square max-w-[15rem] flex flex-col justify-between bg-white">
+  <% if inbox_item.processed? %>
+    <div>
+      <s><%= inbox_item.content %></s>
+      <span class="text-sm text-gray-500">Processed <%= local_time(inbox_item.processed_at) %></span>
+    </div>
+  <% else %>
+    <%= inbox_item.content %>
+  <% end %>
+
+  <div class="text-sm">
+    <%= button_to "Pin", pin_inbox_item_path(inbox_item), form_class: "inline border border-black p-0.5" %>
+    <%= button_to "Unpin", unpin_inbox_items_path, form_class: "inline border border-black p-0.5" %>
+    <%= button_to "Mark as Processed", processed_inbox_item_path(inbox_item), form_class: "inline border border-black p-0.5" %>
+
+    <p>created <%= local_time_ago(inbox_item.created_at) %></p>
   </div>
 </div>

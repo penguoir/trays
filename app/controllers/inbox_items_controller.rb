@@ -1,8 +1,9 @@
 class InboxItemsController < ApplicationController
   before_action :authenticate_user!
+  respond_to :html
 
   def index
-    @inbox_items = current_user.inbox_items
+    @inbox_items = current_user.inbox_items.where(processed: false)
   end
 
   def new
@@ -36,12 +37,13 @@ class InboxItemsController < ApplicationController
     @inbox_item = InboxItem.find(params[:id])
     current_user.update!(pinned_inbox_item: @inbox_item)
 
-    redirect_to inbox_items_path, notice: "Inbox item pinned successfully"
+    redirect_to inbox_items_path
   end
 
   def unpin
     current_user.update!(pinned_inbox_item: nil)
-    redirect_to inbox_items_path, notice: "Inbox item unpinned successfully"
+
+    redirect_to inbox_items_path
   end
 
   private
