@@ -1,6 +1,6 @@
 <%= form_with model: project do |form| %>
   <%= form.text_field :name,
-    class: "rounded w-full mb-8",
+    class: "w-full mb-8",
     placeholder: "Type your project title here...",
     autofocus: current_page?(new_project_path) %>
 
@@ -9,6 +9,11 @@
     autofocus: current_page?(project),
     data: { action: 'focusout->autosave#save click@window->autosave#save' }
   %>
+
+  <div class="block mb-2">
+    <%= form.label :incubating_until, class: "block mb-1" %>
+    <%= form.text_field :incubating_until, class: "w-full" %>
+  </div>
 
   <%= form.submit %>
 <% end %>

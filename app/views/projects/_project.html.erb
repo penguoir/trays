@@ -5,7 +5,15 @@
     else
       "border-gray-300 hover:border-black text-gray-600 hover:text-black"
     end do %>
-  <span><%= project.name %></span>
+  <span>
+    <%= project.name %>
+
+    <% if project.incubating? %>
+      <span class="text-xs text-gray-500">
+        incubating until <%= local_time_ago project.incubating_until %>
+      </span>
+    <% end %>
+  </span>
 
   <% if current_page?(project) %>
     <span>&rarr;</span>

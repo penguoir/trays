@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
   def project_params
     params
       .require(:project)
-      .permit(:name, :content)
+      .permit(:name, :content, :incubating_until)
       .merge(user: current_user)
   end
 end

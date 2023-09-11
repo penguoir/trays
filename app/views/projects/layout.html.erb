@@ -3,10 +3,20 @@
     <div class="col-span-6">
       <div class="flex justify-between">
         <h1 class="mb-4">Projects</h1>
-        <%= link_to 'New Project', new_project_path, class: "text-blue-500 underline mb-8 block" %>
+        <%= link_to 'New Project', new_project_path, class: "text-blue-500 underline block" %>
       </div>
 
-      <%= render @projects %>
+      <div class="mb-12">
+        <%= render @projects.active %>
+      </div>
+
+      <details class="mb-4" <%= @project&.incubating? && "open" %>>
+        <summary>
+          <h2 class="inline-block">Incubating</h2>
+        </summary>
+
+        <%= render @projects.incubating %>
+      </details>
     </div>
 
     <div class="col-span-6">
