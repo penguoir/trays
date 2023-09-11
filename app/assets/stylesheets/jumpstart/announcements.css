@@ -1,8 +1,6 @@
-.announcement {
-  strong {
-    color: $gray-700;
-    font-weight: 900;
-  }
+.announcement strong {
+  color: rgb(55 65 81);
+  font-weight: 900;
 }
 
 .unread-announcements:before {
@@ -12,7 +10,7 @@
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background: $red;
+  background: rgb(248 113 113);
   content: '';
   display: inline-block;
   height: 8px;
