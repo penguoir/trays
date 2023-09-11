@@ -1,8 +1,14 @@
 <%= form_with model: project do |form| %>
-  <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.text_field :name,
+    class: "rounded w-full mb-8",
+    placeholder: "Type your project title here...",
+    autofocus: current_page?(new_project_path) %>
 
-  <%= form.rich_text_area :content %>
+  <%= form.rich_text_area :content,
+    class: "prose-sm mb-8",
+    autofocus: current_page?(project),
+    data: { action: 'focusout->autosave#save click@window->autosave#save' }
+  %>
 
   <%= form.submit %>
 <% end %>

@@ -5,14 +5,12 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body class="d-flex flex-column h-100">
-    <main class="flex-shrink-0"> 
+  <body class="flex flex-col h-100">
+    <main> 
       <%= render 'shared/navbar' %>
       <%= render 'shared/notices' %>
 
-      <div class="container mt-4 mx-auto">
-        <%= yield %>
-      </div>
+      <%= yield %>
 
       <% if current_user&.pinned_inbox_item %>
         <%= render 'inbox_items/inbox_item', inbox_item: current_user.pinned_inbox_item %>

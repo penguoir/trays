@@ -1,7 +1,13 @@
-<div class="card">
-  <div class="card-body">
-    <%= project.name %>
+<%= link_to project,
+  class: "flex justify-between border-b-2 py-2 transition border-b-2 " +
+    if current_page?(project)
+      "border-black text-black"
+    else
+      "border-gray-300 hover:border-black text-gray-600 hover:text-black"
+    end do %>
+  <span><%= project.name %></span>
 
-    <%= link_to 'Show', project %>
-  </div>
-</div>
+  <% if current_page?(project) %>
+    <span>&rarr;</span>
+  <% end %>
+<% end %>

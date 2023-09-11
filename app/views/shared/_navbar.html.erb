@@ -1,3 +1,4 @@
+<!--
 <% if current_user != true_user %>
   <div class="alert alert-warning text-center">
     You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b>
@@ -49,4 +50,13 @@
       </ul>
     </div>
   </div>
+</nav>
+-->
+
+<nav class="border-b">
+  <%= link_to "Trays", root_path %>
+
+  <%= link_to "Capture", new_inbox_item_path, class: "text-blue-500 underline" %>
+  <%= link_to "Inbox", inbox_items_path, class: "text-blue-500 underline" %>
+  <%= link_to "Projects", projects_path, class: "text-blue-500 underline" %>
 </nav>

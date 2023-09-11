@@ -3,14 +3,20 @@ class ProjectsController < ApplicationController
   respond_to :html
 
   def index
-    @projects = Project.all
+    if Project.first
+      redirect_to Project.first
+    else
+      redirect_to new_project_path
+    end
   end
 
   def show
+    @projects = Project.all
     @project = Project.find_by(id: params[:id])
   end
 
   def new
+    @projects = Project.all
     @project = Project.new
   end
 
