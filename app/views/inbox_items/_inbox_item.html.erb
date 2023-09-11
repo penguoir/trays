@@ -17,15 +17,22 @@
   <% if inbox_item.processed? %>
     <div>
       <s><%= inbox_item.content %></s>
-      <span class="text-sm text-gray-500">Processed <%= local_time(inbox_item.processed_at) %></span>
+      &mdash;
+      <span>Processed <%= local_time(inbox_item.processed_at) %></span>
     </div>
   <% else %>
     <%= inbox_item.content %>
   <% end %>
 
   <div class="text-sm">
-    <%= button_to "Pin", pin_inbox_item_path(inbox_item), form_class: "inline border border-black p-0.5" %>
-    <%= button_to "Unpin", unpin_inbox_items_path, form_class: "inline border border-black p-0.5" %>
+    <% if inbox_item.pinned? && local_assigns[:pin] %>
+      <%= button_to "Unpin", unpin_inbox_items_path, form_class: "inline border border-black p-0.5" %>
+    <% elsif inbox_item.pinned? %>
+      <p class="inline">Pinned to bottom of screen</p>
+    <% else %>
+      <%= button_to "Pin", pin_inbox_item_path(inbox_item), form_class: "inline border border-black p-0.5" %>
+    <% end %>
+
     <%= button_to "Mark as Processed", processed_inbox_item_path(inbox_item), form_class: "inline border border-black p-0.5" %>
 
     <p>created <%= local_time_ago(inbox_item.created_at) %></p>

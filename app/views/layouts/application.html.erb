@@ -15,7 +15,7 @@
 
     <% if current_user&.pinned_inbox_item %>
       <div class="sticky bottom-2 mx-auto">
-        <%= render 'inbox_items/inbox_item', inbox_item: current_user.pinned_inbox_item %>
+        <%= render 'inbox_items/inbox_item', inbox_item: current_user.pinned_inbox_item, pin: true %>
       </div>
     <% end %>
 

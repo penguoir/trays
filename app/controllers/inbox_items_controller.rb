@@ -3,7 +3,10 @@ class InboxItemsController < ApplicationController
   respond_to :html
 
   def index
-    @inbox_items = current_user.inbox_items.where(processed: false)
+    @inbox_items = current_user
+      .inbox_items
+      .where(processed: false)
+      .order(created_at: :desc)
   end
 
   def new

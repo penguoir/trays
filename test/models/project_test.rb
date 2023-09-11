@@ -15,8 +15,8 @@ class ProjectTest < ActiveSupport::TestCase
 
   test "can set incubating_until= with NLP" do
     project = Project.new
-    project.incubating_until = "tomorrow"
-    assert_equal 1.day.from_now.to_date, project.incubating_until.to_date
+    project.incubating_until = "10 september 2040"
+    assert_equal DateTime.new(2040, 9, 10, 11, 00), project.incubating_until
     assert_predicate project, :incubating?
   end
 

@@ -13,10 +13,14 @@
         <%= render @inbox_items.first %>
       </div>
 
-      <p>
-        <%= pluralize(@inbox_items.count - 1, "other item") %> in your inbox, process
-        this one to see the next one.
-      </p>
+      <% if @inbox_items.count > 2 %>
+        <p>
+          <%= pluralize(@inbox_items.count - 1, "other item") %> in your inbox, process
+          this one to see the next one.
+        </p>
+      <% else %>
+        No other items in your inbox.
+      <% end %>
     <% end %>
   </div>
 </main>

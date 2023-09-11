@@ -13,6 +13,12 @@ class Project < ApplicationRecord
   scope :active, -> { where.not(id: incubating.ids + waiting_for.ids) }
   scope :missing_next_action, -> { where.missing(:next_actions) }
 
+  after_update_commit :unincubate_later, if: :saved_change_to_incubating_until?
+
+  def unincubate_later
+    UnincubateProjectJob.set(wait_until: incubating_until).perform_later(self)
+  end
+
   def incubating?
     incubating_until&.future? || false
   end
@@ -28,6 +34,7 @@ class Project < ApplicationRecord
   def incubating_until=(value)
     if value.is_a?(String)
       value = Chronic.parse(value, context: :future)
+      return super(nil) if value&.past?
     end
 
     super(value)

@@ -34,4 +34,13 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
       assert_nil project.reload.waiting_since
     end
   end
+
+  test "updating incubating_until enqueues a UnincubateProjectJob" do
+    project = Project.create!(name: "test", user: @user)
+    assert_nil project.incubating_until
+
+    assert_enqueued_with(job: UnincubateProjectJob, args: [project], at: "2040-09-01 12:00".to_datetime) do
+      patch project_url(project), params: { project: { incubating_until: "1 september 2040" } }
+    end
+  end
 end
