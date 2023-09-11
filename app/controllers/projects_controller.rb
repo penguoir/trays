@@ -15,6 +15,10 @@ class ProjectsController < ApplicationController
     @project = Project.find_by(id: params[:id])
   end
 
+  def edit
+    redirect_to project_path(params[:id])
+  end
+
   def new
     @projects = Project.all
     @project = Project.new
@@ -44,7 +48,7 @@ class ProjectsController < ApplicationController
   def project_params
     params
       .require(:project)
-      .permit(:name, :content, :incubating_until)
+      .permit(:name, :content, :incubating_until, :waiting_for)
       .merge(user: current_user)
   end
 end

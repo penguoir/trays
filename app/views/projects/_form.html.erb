@@ -15,5 +15,10 @@
     <%= form.text_field :incubating_until, class: "w-full" %>
   </div>
 
+  <div class="block mb-2">
+    <%= form.label :waiting_for, class: "block mb-1" %>
+    <%= form.text_field :waiting_for, class: "w-full" %>
+  </div>
+
   <%= form.submit %>
 <% end %>

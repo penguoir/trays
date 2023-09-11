@@ -20,11 +20,34 @@ class ProjectTest < ActiveSupport::TestCase
     assert_predicate project, :incubating?
   end
 
-  test ".active scope is opposite of incubating" do
+  test ".active is not waiting and not incubating" do
     project = Project.new
     assert_predicate project, :active?
 
-    project = Project.new(incubating_until: 1.day.from_now)
+    project.incubating_until = 1.day.from_now
+    assert_predicate project, :incubating?
     assert_not_predicate project, :active?
+    project.incubating_until = nil
+
+    project.waiting_for = "something"
+    assert_predicate project, :waiting_for?
+    assert_not_predicate project, :active?
+  end
+
+  test "cannot set blank waiting for" do
+    project = Project.new
+    project.waiting_for = ""
+    assert_nil project.waiting_for
+
+    project.waiting_for = " "
+    assert_nil project.waiting_for
+  end
+
+  test "project cannot be waiting for and incubating" do
+    project = Project.new
+    project.waiting_for = "something"
+    project.incubating_until = 1.day.from_now
+    assert_not project.valid?
+    assert_equal ["cannot be waiting for and incubating"], project.errors[:base]
   end
 end

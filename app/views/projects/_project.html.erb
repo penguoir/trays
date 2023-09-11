@@ -13,6 +13,12 @@
         incubating until <%= local_time_ago project.incubating_until %>
       </span>
     <% end %>
+
+    <% if project.waiting_for? %>
+      <span class="text-xs text-gray-500">
+        waiting for <%= project.waiting_for %>
+      </span>
+    <% end %>
   </span>
 
   <% if current_page?(project) %>

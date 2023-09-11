@@ -6,7 +6,7 @@
         <%= link_to 'New Project', new_project_path, class: "text-blue-500 underline block" %>
       </div>
 
-      <div class="mb-12">
+      <div class="mb-24">
         <%= render @projects.active %>
       </div>
 
@@ -16,6 +16,14 @@
         </summary>
 
         <%= render @projects.incubating %>
+      </details>
+
+      <details class="mb-4" <%= @project&.waiting_for? && "open" %>>
+        <summary>
+          <h2 class="inline-block">Waiting For</h2>
+        </summary>
+
+        <%= render @projects.waiting_for %>
       </details>
     </div>
 
