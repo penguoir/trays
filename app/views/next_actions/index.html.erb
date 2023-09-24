@@ -1,18 +1,13 @@
-<div class="flex max-w-6xl">
-  <div class="xl:w-[15%]"></div>
+<div class="flex justify-between mb-8">
+  <h1 class="grow font-bold flex items-center">
+    Next Actions
+  </h1>
 
-  <div class="px-4 w-full mt-16 flex-grow">
-    <div class="flex justify-between mb-8">
-      <h1 class="flex-grow font-bold flex items-center">
-        Next Actions
-      </h1>
-      <%= link_to 'New Next Action', new_next_action_path, class: "text-blue-500 underline block" %>
-    </div>
-
-    <div class="mb-24">
-      <%= render @incomplete_next_actions.incomplete %>
-    </div>
-
-    <%= link_to 'Completed next actions', completed_next_actions_path, class: "text-blue-500 underline block mr-2" %>
-  </div>
+  <%= link_to 'New Next Action', new_next_action_path, class: "text-blue-500 underline block" %>
 </div>
+
+<div class="mb-24">
+  <%= render @incomplete_next_actions %>
+</div>
+
+<%= link_to 'Completed next actions', completed_next_actions_path, class: "text-blue-500 underline block mr-2" %>

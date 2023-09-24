@@ -2,6 +2,8 @@ class NextActionsController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
 
+  layout 'third'
+
   def index
     @next_actions = NextAction.where(user: current_user)
     @incomplete_next_actions = @next_actions.incomplete

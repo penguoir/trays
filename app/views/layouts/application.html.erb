@@ -9,8 +9,12 @@
     <%= render 'shared/navbar' %>
     <%= render 'shared/notices' %>
 
-    <div class="flex-grow">
-      <%= yield %>
+    <div class="grow">
+      <% if content_for? :content %>
+        <%= yield :content %>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </div>
 
     <% if current_user&.pinned_inbox_item %>

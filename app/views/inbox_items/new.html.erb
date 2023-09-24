@@ -1,16 +1,11 @@
-<main class="container mx-auto mt-16 px-4 grid grid-cols-12">
-  <div class="col-span-6">
-    <h1 class="mb-8">Add to inbox</h1>
+<h1 class="mb-8">Add to inbox</h1>
 
-    <div class="mb-4">
-      <%= form_with model: @inbox_item do |f| %>
-        <div class="mb-2">
-          <%= f.rich_text_area :content, autofocus: true, placeholder: "Type here to add to your inbox..." %>
-        </div>
-
-        <%= f.submit "Add to Inbox", class: "border border-black px-2 py-1" %>
-      <% end %>
+<div class="mb-4">
+  <%= form_with model: @inbox_item do |f| %>
+    <div class="mb-2">
+      <%= f.rich_text_area :content, autofocus: true, placeholder: "Type here to add to your inbox..." %>
     </div>
-  </div>
-</main>
 
+    <%= f.submit "Add to Inbox", class: "border border-black px-2 py-1" %>
+  <% end %>
+</div>

@@ -2,6 +2,8 @@ class InboxItemsController < ApplicationController
   before_action :authenticate_user!
   respond_to :html
 
+  layout 'third'
+
   def index
     @inbox_items = current_user
       .inbox_items

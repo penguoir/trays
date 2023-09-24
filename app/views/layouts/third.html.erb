@@ -1,0 +1,11 @@
+<% content_for :content do %>
+  <div class="flex max-w-6xl">
+    <div class="xl:w-[15%]"></div>
+
+    <div class="w-full px-4 mt-16">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>
